@@ -1,0 +1,48 @@
+Ejercicio 2: Arquitectura en Tres Capas
+Este proyecto refactoriza la aplicacion monolitica del Ejercicio 1 para usar una arquitectura de 3 capas. La funcionalidad es la misma: agregar y listar productos en una lista en memoria.
+
+Identificacion de las capas
+
+Capa de Presentacion (server.js):
+
+Maneja las peticiones HTTP (GET y POST para /products).
+
+Recibe datos del usuario (como name y price) y los pasa a la capa de logica.
+
+Devuelve respuestas en JSON.
+
+Ejemplo: Cuando se hace un POST /products, recoge los datos y llama a la funcion de la capa de logica.
+
+Capa de Negocio (logica.js):
+
+Contiene las reglas de como agregar o listar productos.
+
+Decide como crear un producto (por ejemplo, asigna un ID) y que mostrar.
+
+Habla con la capa de datos para guardar o recuperar productos.
+
+Ejemplo: La funcion agregarProducto crea un objeto con ID, nombre y precio.
+
+Capa de Datos (datos.js):
+
+Gestiona la lista de productos en memoria.
+
+Solo se encarga de guardar y devolver los datos, sin reglas complicadas.
+
+Ejemplo: guardarProducto agrega un producto a la lista.
+
+Ventajas respecto a la version monolitica
+
+Mas facil de entender:
+Cada archivo hace una cosa especifica. Si quiero cambiar como guardar los productos, solo miro datos.js.
+
+Mas facil de cambiar:
+Puedo modificar una capa sin tocar las otras. Por ejemplo, cambiar la lista en memoria por una base de datos solo afecta datos.js.
+
+Mas facil de probar:
+Puedo probar la logica de negocio (como agregarProducto) sin necesitar un servidor.
+
+Reutilizable:
+Si quiero usar la logica de productos en otra aplicacion, puedo importar logica.js sin copiar todo.
+
+En la version monolitica, todo estaba mezclado en un archivo, lo que hacia dificil cambiar o probar una parte sin afectar el resto. Ahora, con las capas separadas, el codigo es mas organizado y flexible.
